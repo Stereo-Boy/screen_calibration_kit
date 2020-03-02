@@ -22,7 +22,7 @@ function paramOptim=ScreenCalibration(mode, viewPixx, bit_list, gammaParam)
 %-----------------------------------------------------------------------
 
 
-pas=50;
+pas=25;
 paramOptim=[];
 if exist('viewPixx','var')==0 || isempty(viewPixx); viewPixx = 0; end
    
@@ -31,7 +31,7 @@ if mode==1
 end
 scr.inputMode = 1;
 if mode==3
-    listLum=0:pas:120; fig=2;
+    listLum=0:10:100; fig=2;
     bit_list=sc(listLum, gammaParam);
 end
 
@@ -85,7 +85,7 @@ switch mode
     else
         xlabel('Luminance wanted');  
     end
-        ylabel('Luminance measured');e
+        ylabel('Luminance measured');
         
     if mode==1
         disp('Screen calibration is finished');
