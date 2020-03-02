@@ -25,13 +25,13 @@ function paramOptim=ScreenCalibration(mode, viewPixx, bit_list, gammaParam)
 pas=50;
 paramOptim=[];
 if exist('viewPixx','var')==0 || isempty(viewPixx); viewPixx = 0; end
-    
+   
 if mode==1
-    bit_list =  0:pas:255;
+    bit_list =  0:pas:255; fig=1;
 end
 scr.inputMode = 1;
 if mode==3
-    listLum=0:pas:120;
+    listLum=0:pas:120; fig=2;
     bit_list=sc(listLum, gammaParam);
 end
 
@@ -79,17 +79,21 @@ switch mode
         bit = listLum;
     end
     %find correction
-    paramOptim=fitparam(bit,lum,1);
-    xlabel('Bit'); %GUN
-    ylabel('Luminance');
+    paramOptim=fitparam(bit,lum,fig);
+    if fig==1
+        xlabel('Bit'); %GUN
+    else
+        xlabel('Luminance wanted');  
+    end
+        ylabel('Luminance measured');e
+        
     if mode==1
         disp('Screen calibration is finished');
-    else
-        disp('Verification finished');
+        dispi('Gamma parameters are ',paramOptim(1),' and ', paramOptim(2));
+        dispi('Max luminance for that screen: ', paramOptim(1).*(255.^paramOptim(2)),' cd.m-2'); 
     end
-    dispi('Gamma parameters are ',paramOptim(1),' and ', paramOptim(2));
-    if mode == 1
-       dispi('Max luminance for that screen: ', paramOptim(1).*(255.^paramOptim(2)),' cd.m-2'); 
+    if mode==3
+        disp('Verification finished');
     end
    case{2}
        HideCursor
@@ -107,9 +111,7 @@ switch mode
          Screen('Flip',window);
         KbWait;
         Screen('CloseAll');
-
-        %ask for measured luminance
-        ShowCursor
+        ShowCursor;
 end
 
 end
