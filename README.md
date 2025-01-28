@@ -4,7 +4,7 @@
 Matlab Psychtoolbox codes displayed luminance with a bit coding gray between 0 and 255.
 You want to display a precise luminance in candela/m².
 
-## Solution: 
+## Solution #1 
 1) Use run_screen_calibration.m: it shows a series of uniform screens, measure each of them with the photometer
 (from where your observer will look at the screen) and input the value when requested on command window.
 At the end, it issues figure 1 with the gamma fit and your 2 parameters on command window.
@@ -17,7 +17,7 @@ Screen('FillRect',scr.w,sc(10,paramOptim));
 
 paramOptim follows the function: luminance = paramOptim(1).*(bit.^paramOptim(2)));
 
-## Procedure for a dual screen setup
+## Solution #2 (for dual screens)
 ### Step 1: Photometer setup 
 Photometer Settings for a Minolta CS-100
 * Calibration: preset
