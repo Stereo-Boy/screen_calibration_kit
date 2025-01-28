@@ -94,9 +94,10 @@ disp('Now enter the luminances that you measured in the right order')
 for i=1:(nSteps+1)
     measuredLum(i) = input('What luminance did you measure? ');
 end
-plot(1:(nSteps+1),storedLum,'-k'); hold on;
-plot(1:(nSteps+1),measuredLum,'or');
-
+plot(storedLum,measuredLum,'-ok'); hold on;
+xlabel('luminance presented')
+ylabel('luminance measured')
+plot(1:320,1:320,'-r')
 %quit on keyboard mode just in case
 keyboard
 
